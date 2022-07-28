@@ -14,8 +14,7 @@ https://github.com/lordgordon/py-scaffolding
 
 Then, to set everything up on macOS:
 ```sh
-brew install python@3.10 pre-commit
-pip3 install poetry
+brew install python@3.10 pre-commit poetry pylint
 pre-commit install
 make
 ```
@@ -31,6 +30,7 @@ poetry new <project-name>
 # Makefile
 # mypy.ini
 # .dockerignore
+# .coveragerc
 
 # Then run
 pre-commit install
