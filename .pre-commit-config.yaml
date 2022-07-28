@@ -34,13 +34,13 @@ repos:
     hooks:
       - id: isort
         name: isort (python)
-  - repo: https://github.com/PyCQA/bandit
-    rev: 1.7.4
-    hooks:
-      - id: bandit
-        name: bandit
-        args: ["-x", "*/tests/*", "-c", "pyproject.toml", "-r", "."] # Also in pyproject.toml
-        additional_dependencies: [ "bandit[toml]" ]
+#  - repo: https://github.com/PyCQA/bandit
+#    rev: 1.7.4
+#    hooks:
+#      - id: bandit
+#        name: bandit
+#        args: ["-x", "*/tests/*", "-c", "pyproject.toml", "-r", "."] # Also in pyproject.toml
+#        additional_dependencies: [ "bandit[toml]" ]
   - repo: local
     hooks:
       - id: pylint
