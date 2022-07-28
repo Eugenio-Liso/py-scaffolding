@@ -20,25 +20,28 @@ pre-commit install
 make
 ```
 
-### Configure VS Code
-Run the following commands:
-```sh
-mkdir .vscode;touch .vscode/settings.json
+### Configure new project
+
+```bash
+# Creates a new folder
+poetry new <project-name>
+
+# Copy the following files:
+# .pre-commit-config.yaml
+# Makefile
+# mypy.ini
+# .dockerignore
+
+# Then run
+pre-commit install
+
+# Change pytest version to ^7.1 and run
+poetry update
 ```
 
-Then put the following JSON in `.vscode/settings.json` and replace the `python.pythonPath` value with the output of
-`poetry env info -p`, adding `/bin/python` at the end:
-```json
-{
-  "python.pythonPath": "/path/to/poetry/env/bin/python",
-  "python.poetryPath": "poetry",
-  "python.linting.pylintEnabled": true,
-  "python.linting.enabled": true
-}
-```
+### Configure PyCharm
 
-Install the [EditorConfig](https://marketplace.visualstudio.com/items?itemName=EditorConfig.EditorConfig)
-extension to take advantage of `.editorconfig`.
+Open the project and let it do all the magic!
 
 ## Release and Changelog
 
@@ -62,46 +65,4 @@ The main command that run everything (full clean excluded):
 make
 ```
 
-Then, to execute the main entry point with the local Poetry environment:
-```sh
-make run-locally
-```
-
-or open a shell in the Docker image:
-```shell
-make run-shell
-```
-
 `make help` to the rescue in case of doubts.
-
-### Run the production image
-
-To run the main entry point with the production image, first build the production image:
-```sh
-make build
-```
-
-Then:
-```sh
-docker run --rm -it py-scaffolding:latest
-```
-
-### Serving commands
-| command | description |
-| :-- | :-- |
-| `make serve-coverage` | Start a local server to show the HTML code coverage report. |
-| `make serve-doc` | Start a local server to show the internal documentation. |
-
-### Helpful commands
-| command | description |
-| :-- | :-- |
-| `make update` | Just update the environment. |
-| `make autolint` | Autolinting code. |
-| `make lint-base` | Code linting without running autolinters. |
-| `make lint` | Autolint and code linting. |
-| `make test` | Run all the tests with code coverage. You can also `make test tests/test_my_specific.py`. |
-| `make doc` | Compile and update the internal documentation. |
-| `make clean` | Force a clean environment: remove all temporary files and caches. Start from a new environment. This command allow to start over from a fresh state. |
-| `make build` | Build the Docker image. |
-| `make run-locally` | Execute the main entry point locally (with Poetry). |
-| `make run-shell` | Open a shell in the Docker image. |
