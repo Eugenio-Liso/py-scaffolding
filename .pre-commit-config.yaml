@@ -21,6 +21,7 @@ repos:
     hooks:
       - id: mypy
         additional_dependencies: [pydantic==1.9.1,types-requests==2.27.30]
+        verbose: true
   - repo: https://github.com/psf/black
     rev: 22.6.0
     hooks:
