@@ -31,6 +31,7 @@ poetry new <project-name>
 # mypy.ini
 # .dockerignore
 # .coveragerc
+# run-mypy.sh
 
 # Then run
 pre-commit install
