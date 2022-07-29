@@ -4,7 +4,7 @@ NC=\033[0m # No Color
 
 .PHONY: all shell update autolint lint-mypy lint-base lint unit-test test serve-coverage clean help
 
-all: update lint test
+all: lint test
 
 shell: ## Create a shell with all the dependencies needed
 	@echo "\n${BLUE}Running poetry shell...${NC}\n"
