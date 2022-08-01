@@ -29,9 +29,12 @@ poetry new <project-name>
 # .pre-commit-config.yaml
 # Makefile
 # mypy.ini
+# .gitignore
 # .dockerignore
 # .coveragerc
 # run-mypy.sh
+
+# Then create the project on your favourite Git platform and init the repository
 
 # Then run
 pre-commit install
@@ -39,9 +42,11 @@ pre-commit install
 # Change pytest version to ^7.1 and run
 poetry update
 
-# Remove README.rst and create a new file README.md with the template you find in README_TEMPLATE.md. Fill the Introduction paragraph
+# Add mypy as dependency
+poetry add mypy
 
-# Then create the project on your favourite Git platform and push!
+# Remove README.rst and create a new file README.md with the template you find in README_TEMPLATE.md. Fill the Introduction paragraph
+# Enjoy!
 ```
 
 ### Configure PyCharm

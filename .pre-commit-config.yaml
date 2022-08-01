@@ -28,7 +28,7 @@ repos:
         entry: "./run-mypy.sh"
         language: python
         language_version: python3.10
-        additional_dependencies: ["mypy==0.961"]
+        # additional_dependencies: ["mypy==0.961"]
         types: [python]
         require_serial: true
         verbose: true
