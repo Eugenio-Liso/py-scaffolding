@@ -10,6 +10,7 @@ I confirm that before submitting this PR I have:
   - [ ] added development commands
   - [ ] added section where it is described what this repo does in detail
 - [ ] updated Confluence with new relevant information
+- [ ] added documentation for Backstage
 
 ## Notes for reviewers
 

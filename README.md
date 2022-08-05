@@ -76,3 +76,10 @@ make
 ```
 
 `make help` to the rescue in case of doubts.
+
+## Troubleshoot
+
+### Pylint
+
+If you get an error when running the pre-commit hook, spawn a `poetry shell` and run the command `pylint <module-name>`.
+That should fix it (I do not know the reason yet).

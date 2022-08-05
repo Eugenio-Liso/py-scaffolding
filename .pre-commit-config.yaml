@@ -8,13 +8,13 @@ repos:
       - id: trailing-whitespace
       - id: end-of-file-fixer
       - id: check-yaml
+        args: [--allow-multiple-documents]
       - id: check-added-large-files
       - id: check-json
       - id: check-merge-conflict
       - id: check-symlinks
       - id: check-toml
       - id: check-xml
-      - id: check-yaml
       - id: mixed-line-ending
   - repo: local
     # We do not use pre-commit/mirrors-mypy,
