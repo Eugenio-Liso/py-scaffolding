@@ -59,7 +59,11 @@ repos:
         entry: pylint
         language: system
         types: [ python ]
-        exclude: ^tests/
+        exclude: |
+                (?x)(
+                    ^tests/|
+                    ^migrations/
+                )
         args:
           [
             "-rn", # Only display messages
