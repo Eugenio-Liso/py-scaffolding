@@ -1,10 +1,7 @@
 POETRY_RUN := poetry run
 BLUE=\033[0;34m
 NC=\033[0m # No Color
-
-.PHONY: all shell update autolint lint-mypy lint-base lint unit-test test serve-coverage clean help
-
-all: lint test
+REPO_MAIN_FOLDER := "CHANGE ME"
 
 shell: ## Create a shell with all the dependencies needed
 	@echo "\n${BLUE}Running poetry shell...${NC}\n"
@@ -25,28 +22,32 @@ autolint: ## Autolinting code
 	@echo "\n${BLUE}Running autolinting...${NC}\n"
 	@${POETRY_RUN} black --target-version py310 .
 	@${POETRY_RUN} isort .
-	@${POETRY_RUN} pyupgrade --py310-plus $(shell find change_lr -name "*.py")
+	@${POETRY_RUN} pyupgrade --py310-plus $(shell find $(REPO_MAIN_FOLDER) -name "*.py")
 
 lint-mypy: ## Runs only mypy lint
 	@echo "\n${BLUE}Running mypy...${NC}\n"
 	@${POETRY_RUN} mypy .
 
 lint-base: lint-mypy ## Autolint and code linting
-	#	@echo "\n${BLUE}Running bandit...${NC}\n"
-	#	@${POETRY_RUN} bandit -c pyproject.toml -r change_lr
+	@echo "\n${BLUE}Running bandit...${NC}\n"
+	@${POETRY_RUN} bandit -c pyproject.toml -r $(REPO_MAIN_FOLDER)
 	@echo "\n${BLUE}Running pylint...${NC}\n"
-	@${POETRY_RUN} pylint change_lr
+	@${POETRY_RUN} pylint $(REPO_MAIN_FOLDER)
 
 lint: lint-base autolint ## Complete autolint
 
 unit-test: ## Run unit tests.
 	@echo "\n${BLUE}Running unit tests...${NC}\n"
-	@${POETRY_RUN} pytest .
+	@${POETRY_RUN} pytest tests/unit
 
-test: ## Run all the tests with code coverage. You can also `make test tests/test_my_specific.py`
+integration-test: ## Run integration tests
+	@echo "\n${BLUE}Running integration tests...${NC}\n"
+	@${POETRY_RUN} pytest tests/integration
+
+coverage: ## Tests coverage
 	@echo "\n${BLUE}Running pytest with coverage...${NC}\n"
 	@${POETRY_RUN} coverage erase;
-	@${POETRY_RUN} coverage run -m pytest \
+	@${POETRY_RUN} coverage run -m pytest tests \
 		--junitxml=junit/test-results.xml \
 		--verbose \
 		-s \
@@ -54,6 +55,8 @@ test: ## Run all the tests with code coverage. You can also `make test tests/tes
 	@${POETRY_RUN} coverage report
 	@${POETRY_RUN} coverage html
 	@${POETRY_RUN} coverage xml
+
+test: unit-test integration-test coverage ## Run all tests
 
 serve-coverage: ## Start a local server to show the HTML code coverage report
 	@echo "\n${BLUE}Open http://localhost:8000/ \n\nKill with CTRL+C${NC}\n"
@@ -70,6 +73,10 @@ clean: ## Force a clean environment: remove all temporary files and caches. Star
 	poetry env info -p
 	poetry env remove $(shell poetry run which python)
 	poetry env list
+
+recreate-local-dockers: ## For local testing
+	docker-compose down --volumes
+	docker-compose build && docker-compose up
 
 help: ## Show this help
 	@egrep -h '\s##\s' $(MAKEFILE_LIST) \

@@ -1,8 +1,6 @@
 # py-scaffolding
 My custom Python project scaffolding repository.
-https://github.com/lordgordon/py-scaffolding
-
-![pr-validation](https://github.com/lordgordon/py-scaffolding/workflows/pr-validation/badge.svg?branch=main)
+Inspired by https://github.com/lordgordon/py-scaffolding
 
 ## Requirements and setup
 
@@ -14,9 +12,8 @@ https://github.com/lordgordon/py-scaffolding
 
 Then, to set everything up on macOS:
 ```sh
-brew install python@3.10 pre-commit poetry pylint
+brew install python@3.10 pre-commit poetry
 pre-commit install
-make
 ```
 
 ### Configure new project
@@ -26,13 +23,14 @@ make
 poetry new <project-name>
 
 # Copy the following files:
-# .pre-commit-config.yaml
-# Makefile
-# mypy.ini
-# .gitignore
-# .dockerignore
-# .coveragerc
-# run-mypy.sh
+- .pre-commit-config.yaml
+- Makefile
+- mypy.ini
+- .gitignore
+- .dockerignore
+- .coveragerc
+- run-pre-commit-command.sh
+- pytest.ini
 
 # Then create the project on your favourite Git platform and init the repository
 
@@ -42,40 +40,13 @@ pre-commit install
 # Change pytest version to ^7.1 and run
 poetry update
 
-# Add mypy as dependency
-poetry add mypy
-
 # Remove README.rst and create a new file README.md with the template you find in README_TEMPLATE.md. Fill the Introduction paragraph
 # Enjoy!
 ```
 
-### Configure PyCharm
+### Configure PyCharm/IntelliJ Idea
 
 Open the project and let it do all the magic!
-
-## Release and Changelog
-
-Version bump and changelog update:
-```sh
-# PATCH
-poetry run cz bump --increment PATCH -ch --dry-run
-# MINOR
-poetry run cz bump --increment MINOR -ch --dry-run
-# MAJOR
-poetry run cz bump --increment MAJOR -ch --dry-run
-```
-
-If OK, run again without `--dry-run`. For full details see
-https://commitizen-tools.github.io/commitizen/bump/
-
-## Commands
-
-The main command that run everything (full clean excluded):
-```sh
-make
-```
-
-`make help` to the rescue in case of doubts.
 
 ## Troubleshoot
 
